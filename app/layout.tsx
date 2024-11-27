@@ -40,13 +40,7 @@ export default function RootLayout({
           <div className="min-h-screen">
             <div
               className="
-              max-w-full 
-              lg:max-w-[768px] lg:px-[40px] mx-auto
-              pr-20
-              pl-20
-              md:max-w-[640px] 
-              sm:max-w-[475px]
-              "
+              lg:px-[40px] md:max-w-[768px] sm:max-w-[640px] max-w-[475px] lg:max-w-[1366px] xl:max-w-[1024px] mx-auto px-20"
             >
               <NavBar />
               {children}
