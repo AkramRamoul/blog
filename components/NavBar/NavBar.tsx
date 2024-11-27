@@ -1,31 +1,58 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import UserMenu from "../UserMenu";
 import ThemeToggle from "../ThemeToggle";
+import MobileMenu from "./MobileMenu";
+import NavbarLinks from "./Link";
 
 const NavBar = () => {
   return (
     <div className="flex items-center justify-between h-[100px]">
       {/* Social Media Icons */}
-      <div className="flex gap-3 flex-1 items-center justify-start">
+      <div className="hidden lg:flex justify-center flex-1 items-center col-span-6 gap-x-2">
         <Image src="/facebook.png" alt="facebook" width={24} height={24} />
         <Image src="/instagram.png" alt="instagram" width={24} height={24} />
         <Image src="/youtube.png" alt="youtube" width={24} height={24} />
       </div>
 
-      {/* Center Logo */}
-      <div className="flex-1 text-center text-4xl font-bold flex items-center justify-center">
+      {/* Logo */}
+      <div
+        className="
+      flex
+      flex-1 
+      text-left
+      font-bold 
+      text-[24px]
+      lg:text-[36px] 
+      md:text-[32px] 
+      md:text-center
+    "
+      >
         BLOG
       </div>
 
-      {/* Links and User Menu */}
-      <div className="flex gap-5 flex-1 items-center justify-center text-xl font-semibold">
+      {/* Links */}
+      <div
+        className="
+      flex 
+      items-center 
+      justify-start
+      gap-[20px] 
+      flex-1 
+      ml-10
+      text-[20px] 
+      lg:ml-0
+      xl:text-[18px] 
+      xl:gap-[15px] 
+      sm:justify-center
+    "
+      >
         <ThemeToggle />
-        <Link href="/">Homepage</Link>
-        <Link href="/">Contact</Link>
-        <Link href="/">About</Link>
+        <NavbarLinks />
         <UserMenu />
+      </div>
+      <div className="md:hidden ml-3">
+        <MobileMenu />
       </div>
     </div>
   );

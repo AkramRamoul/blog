@@ -39,9 +39,14 @@ export default function RootLayout({
         >
           <div className="min-h-screen">
             <div
-              className="max-w-screen-2xl ml-auto mr-auto pl-20 pr-20 2xl:max-w-[1366px] xl:max-w-[1024px]
-          lg:max-w-[768px] md:max-w-[512px] sm:max-w-[475px]
-          "
+              className="
+              max-w-full 
+              lg:max-w-[768px] lg:px-[40px] mx-auto
+              pr-20
+              pl-20
+              md:max-w-[640px] 
+              sm:max-w-[475px]
+              "
             >
               <NavBar />
               {children}
