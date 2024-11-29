@@ -7,37 +7,37 @@ const mockData = [
     _id: "1",
     title: "Style",
     slug: "style",
-    img: "/style.png", // Replace with your image path
+    img: "/style.png",
   },
   {
     _id: "2",
     title: "Fashion",
     slug: "fashion",
-    img: "/fashion.png", // Replace with your image path
+    img: "/fashion.png",
   },
   {
     _id: "3",
     title: "Food",
     slug: "food",
-    img: "/food.png", // Replace with your image path
+    img: "/food.png",
   },
   {
     _id: "4",
     title: "Travel",
     slug: "travel",
-    img: "/travel.png", // Replace with your image path
+    img: "/travel.png",
   },
   {
     _id: "5",
     title: "Culture",
     slug: "culture",
-    img: "/culture.png", // Replace with your image path
+    img: "/culture.png",
   },
   {
     _id: "6",
     title: "Coding",
     slug: "coding",
-    img: "/coding.png", // Replace with your image path
+    img: "/coding.png",
   },
 ];
 
@@ -52,7 +52,7 @@ const CategoryList = () => {
           <Link
             href={`/blog?cat=${item.slug}`}
             key={item._id}
-            className={`flex w-full items-center gap-2 capitalize h-20 justify-center rounded-lg lg:w-[20%] md:w-[25%] sm:w-[45%] ${
+            className={`flex w-full items-center gap-2 capitalize h-20 justify-center rounded-lg lg:w-[15%] md:w-[25%] sm:w-[45%] ${
               item.slug === "style"
                 ? "bg-[#57c4ff31]"
                 : item.slug === "fashion"
@@ -77,7 +77,7 @@ const CategoryList = () => {
                 className="rounded-full aspect-square object-cover"
               />
             )}
-            <span className="text-xl font-semibold">{item.title}</span>
+            <span className="font-semibold text-lg">{item.title}</span>
           </Link>
         ))}
       </div>
