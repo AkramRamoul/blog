@@ -4,7 +4,7 @@ import Link from "next/link";
 function Card() {
   return (
     <div className="mb-12 flex gap-12 items-center">
-      <div className="relative flex-1 h-[350px] aspect-square hidden lg:flex">
+      <div className="relative flex-1 h-[350px] aspect-square hidden xl:flex">
         <Image src="/p1.jpeg" alt="post" fill style={{ objectFit: "cover" }} />
       </div>
       <div className="flex-1 flex-col gap-[20px] flex">
