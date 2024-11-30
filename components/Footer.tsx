@@ -4,14 +4,16 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full h-auto mt-16 mb-10 flex items-center flex-col">
+    <footer className="relative w-full h-[30] mt-16 mb-10 flex items-center flex-col">
       <Image
         src="/neko_line.gif"
+        unoptimized
         alt="footer"
-        className="max-w-[550px] h-auto"
+        className="h-auto w-[300px] sm:w-[550px] max-w-full"
         width={550}
         height={30}
       />
+
       <div className="py-[20px] px-0 mt-[50px] flex items-center justify-between text-muted-foreground flex-col md:flex-row gap-0 md:gap-[50px]">
         <div className="flex-1 flex flex-col gap-[14px]">
           <div className="flex items-center gap-[10px] ">
