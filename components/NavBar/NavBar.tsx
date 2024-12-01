@@ -5,14 +5,24 @@ import ThemeToggle from "../ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import NavbarLinks from "./Link";
 
+const socialMedia = [
+  { src: "/facebook.png", alt: "Facebook" },
+  { src: "/instagram.png", alt: "Instagram" },
+  { src: "/youtube.png", alt: "YouTube" },
+];
 const NavBar = () => {
   return (
     <div className="flex items-center justify-between h-[100px]">
-      {/* Social Media Icons */}
       <div className="hidden lg:flex justify-center flex-1 items-center col-span-6 gap-x-2">
-        <Image src="/facebook.png" alt="facebook" width={24} height={24} />
-        <Image src="/instagram.png" alt="instagram" width={24} height={24} />
-        <Image src="/youtube.png" alt="youtube" width={24} height={24} />
+        {socialMedia.map((media) => (
+          <Image
+            key={media.alt}
+            src={media.src}
+            alt={`${media.alt} icon`}
+            width={24}
+            height={24}
+          />
+        ))}
       </div>
 
       {/* Logo */}

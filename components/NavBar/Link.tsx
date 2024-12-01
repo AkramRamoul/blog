@@ -32,7 +32,7 @@ function NavbarLinks() {
           href={link.href}
           className={cn(
             path === link.href
-              ? "bg-muted"
+              ? "bg-muted text-primary"
               : "hover:bg-muted hover:bg-opacity-75",
             "group flex items-center px-2 py-2 font-medium rounded-md"
           )}
