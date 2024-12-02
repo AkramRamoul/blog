@@ -4,6 +4,8 @@ import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import AuthContext from "@/context/AuthContext";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,23 +33,26 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-full overflow-x-hidden`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="min-h-screen">
-            <div
-              className="
+        <AuthContext>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="min-h-screen">
+              <div
+                className="
               lg:px-[40px] md:max-w-[768px] sm:max-w-[640px] max-w-[475px] lg:max-w-[1366px] xl:max-w-[1024px] mx-auto px-20"
-            >
-              <NavBar />
-              {children}
-              <Footer />
+              >
+                <NavBar />
+                {children}
+                <Toaster />
+                <Footer />
+              </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AuthContext>
       </body>
     </html>
   );

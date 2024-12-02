@@ -1,9 +1,39 @@
 "use client";
+import { signIn, useSession } from "next-auth/react";
 import AuthSocialButton from "../../components/AuthSocialButton";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsFacebook, BsGithub, BsGoogle } from "react-icons/bs";
+import { toast } from "sonner";
+import { ImSpinner2 } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
+  const router = useRouter();
+  const { status } = useSession();
+
+  const socialSignIn = (action: string) => {
+    signIn(action, { redirect: false }).then((callback) => {
+      if (callback?.error) {
+        toast.error("Invalid Credentials");
+      }
+      if (callback?.ok && !callback.error) {
+        toast.success("Logged in");
+      }
+    });
+  };
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <ImSpinner2 className="animate-spin h-12 w-12" />
+      </div>
+    );
+  }
   return (
     <div className="flex mt-8 items-center justify-center ">
       <div
@@ -18,15 +48,15 @@ function LoginPage() {
         </h1>
         <AuthSocialButton
           icon={BsGithub}
-          onClick={() => console.log("github")}
+          onClick={() => socialSignIn("github")}
         />
         <AuthSocialButton
           icon={BsGoogle}
-          onClick={() => console.log("google")}
+          onClick={() => socialSignIn("google")}
         />
         <AuthSocialButton
           icon={BsFacebook}
-          onClick={() => console.log("facebook")}
+          onClick={() => socialSignIn("facebook")}
         />
       </div>
     </div>
