@@ -34,6 +34,7 @@ function LoginPage() {
       </div>
     );
   }
+  console.log(status);
   return (
     <div className="flex mt-8 items-center justify-center ">
       <div
