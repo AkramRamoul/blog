@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.post.findMany();
     return NextResponse.json(categories);
   } catch (error) {
     console.error("Error fetching categories:", error);
