@@ -1,7 +1,7 @@
-import CardList from "@/components/Card/CardList";
-import CategoryList from "@/components/CategoryList";
-import Featured from "@/components/Featured";
-import Menu from "@/components/Menu/Menu";
+import CardList from "@/app/components/Card/CardList";
+import CategoryList from "@/app/components/CategoryList";
+import Featured from "@/app/components/Featured";
+import Menu from "@/app/components/Menu/Menu";
 
 export default function Home() {
   return (

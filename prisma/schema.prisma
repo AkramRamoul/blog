@@ -10,22 +10,24 @@ datasource db {
 }
 
 model Account {
-  id                 String   @id @default(cuid())
+  id String @id @default(uuid()) // Use UUID for id
   userId             String
-  type           String
-  provider  String
-  providerAccountId               String
-  refresh_token        String?
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  // No `@db.String` needed for PostgreSQL
   access_token       String?
-  expires_at          Int?
+  expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?  
+  id_token           String?
   session_state      String?
-  user               User     @relation(fields: [userId], references: [id])
 
-  @@unique([provider, providerAccountId]) // Compound unique constraint
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
+
 
 
 model Session {
@@ -49,6 +51,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
+  comments      Comment[]
 }
 
 model VerificationRequest {
@@ -60,4 +64,38 @@ model VerificationRequest {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String?
+  img         String?
+  posts       Post[]
+}
+
+model Post {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  desc        String
+  img         String?
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  catSlug     String 
+  category    Category @relation(fields: [catSlug], references: [slug])
+  userEmail   String
+  user        User     @relation(fields: [userEmail], references: [email])
+  comments    Comment[]
+}
+
+model Comment {
+  id  String  @id @default(cuid())
+  createdAt  DateTime @default(now())
+  content String
+  userEmail String
+  postSlug String
+  user User @relation(fields: [userEmail], references: [email])
+  post Post @relation(fields: [postSlug], references: [slug])
 }

@@ -1,57 +1,32 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Category } from "@prisma/client";
 
-const mockData = [
-  {
-    _id: "1",
-    title: "Style",
-    slug: "style",
-    img: "/style.png",
-  },
-  {
-    _id: "2",
-    title: "Fashion",
-    slug: "fashion",
-    img: "/fashion.png",
-  },
-  {
-    _id: "3",
-    title: "Food",
-    slug: "food",
-    img: "/food.png",
-  },
-  {
-    _id: "4",
-    title: "Travel",
-    slug: "travel",
-    img: "/travel.png",
-  },
-  {
-    _id: "5",
-    title: "Culture",
-    slug: "culture",
-    img: "/culture.png",
-  },
-  {
-    _id: "6",
-    title: "Coding",
-    slug: "coding",
-    img: "/coding.png",
-  },
-];
+import axios from "axios";
 
-const CategoryList = () => {
+const getData = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/api/categories");
+    return response.data;
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    return null;
+  }
+};
+
+const CategoryList = async () => {
+  const Data = await getData();
   return (
     <div className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center my-12">
         Popular Categories
       </h1>
       <div className="flex flex-wrap justify-between gap-3">
-        {mockData.map((item) => (
+        {Data.map((item: Category) => (
           <Link
             href={`/blog?cat=${item.slug}`}
-            key={item._id}
+            key={item.id}
             className={`flex w-full items-center gap-2 capitalize h-20 justify-center rounded-lg lg:w-[15%] md:w-[25%] sm:w-[45%] ${
               item.slug === "style"
                 ? "bg-[#57c4ff31]"
@@ -71,7 +46,7 @@ const CategoryList = () => {
             {item.img && (
               <Image
                 src={item.img}
-                alt={item.title}
+                alt={item.slug}
                 width={42}
                 height={42}
                 className="rounded-full aspect-square object-cover"

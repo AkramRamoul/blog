@@ -1,5 +1,5 @@
-import CardList from "@/components/Card/CardList";
-import Menu from "@/components/Menu/Menu";
+import CardList from "@/app/components/Card/CardList";
+import Menu from "@/app/components/Menu/Menu";
 
 function Home() {
   return (

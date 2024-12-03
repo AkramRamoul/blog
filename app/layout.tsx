@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavBar from "@/components/NavBar/NavBar";
-import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import NavBar from "@/app/components/NavBar/NavBar";
+import Footer from "@/app/components/Footer";
+import { ThemeProvider } from "@/app/components/providers/theme-provider";
 import AuthContext from "@/context/AuthContext";
 import { Toaster } from "sonner";
 

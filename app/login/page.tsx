@@ -1,6 +1,6 @@
 "use client";
 import { signIn, useSession } from "next-auth/react";
-import AuthSocialButton from "../../components/AuthSocialButton";
+import AuthSocialButton from "../components/AuthSocialButton";
 import React, { useEffect } from "react";
 import { BsFacebook, BsGithub, BsGoogle } from "react-icons/bs";
 import { toast } from "sonner";

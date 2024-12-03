@@ -1,5 +1,5 @@
-import Comments from "@/components/comments/Comments";
-import Menu from "@/components/Menu/Menu";
+import Comments from "@/app/components/comments/Comments";
+import Menu from "@/app/components/Menu/Menu";
 import Image from "next/image";
 import React from "react";
 
