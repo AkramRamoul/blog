@@ -2,21 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Category } from "@prisma/client";
-
-import axios from "axios";
-
-const getData = async () => {
-  try {
-    const response = await axios.get("http://localhost:3000/api/categories");
-    return response.data;
-  } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
-  }
-};
+import { getCategory } from "@/actions/actions";
 
 const CategoryList = async () => {
-  const Data = await getData();
+  const Data = await getCategory();
   return (
     <div className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center my-12">
