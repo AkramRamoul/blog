@@ -10,8 +10,12 @@ function Card({ post }: { post: Post }) {
       </div>
       <div className="flex-1 flex-col gap-[20px] flex">
         <div>
-          <span className="text-muted-foreground">29.11.2024 - </span>
-          <span className="text-[#DC143C] font-semibold">{post.catSlug}</span>
+          <span className="text-muted-foreground">
+            {post.createdAt.toString().substring(0, 10) + " "}
+          </span>
+          <span className="text-[#DC143C] font-semibold capitalize">
+            {post.catSlug}
+          </span>
         </div>
         <Link href="#">
           <h1>{post.title}</h1>
