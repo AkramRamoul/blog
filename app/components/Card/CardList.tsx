@@ -8,21 +8,30 @@ const getData = async (page: number) => {
     cache: "no-store",
   });
   const data = await res.json();
-  return data.posts; // Extracting 'posts' from the response
+  return data;
 };
 
 async function CardList({ page }: { page: number }) {
-  const posts: Post[] = await getData(page);
+  const { posts, count } = await getData(page);
+
+  const POST_PER_PAGE = 2;
+
+  const hasPreviousPage = POST_PER_PAGE * (page - 1) > 0;
+  const hasNextPage = POST_PER_PAGE * page < count;
 
   return (
     <div className="flex-[5]">
       <h1 className="text-4xl my-12 font-semibold">Recent posts</h1>
       <div>
-        {posts.map((post) => (
+        {posts.map((post: Post) => (
           <Card key={post.id} post={post} />
         ))}
       </div>
-      <Pagination />
+      <Pagination
+        page={page}
+        hasNextPage={hasNextPage}
+        hasPreviousPage={hasPreviousPage}
+      />
     </div>
   );
 }
