@@ -20,6 +20,11 @@ export const links = [
     name: "About",
     href: "/about",
   },
+  {
+    id: 3,
+    name: "Your Blogs",
+    href: "/blog",
+  },
 ];
 
 function NavbarLinks() {
