@@ -14,12 +14,15 @@ export const getCategory = async () => {
 export const getUserPosts = async () => {
   const user = await getCurrentUser();
   if (!user) {
-    return [];
+    return null;
   }
   try {
     const response = await prisma.post.findMany({
       where: {
         id: user.id,
+      },
+      include: {
+        comments: true,
       },
     });
     return response;
