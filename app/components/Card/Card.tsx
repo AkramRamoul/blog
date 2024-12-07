@@ -11,7 +11,7 @@ function Card({ post }: { post: Post }) {
       <div className="flex-1 flex-col gap-[20px] flex">
         <div>
           <span className="text-muted-foreground">
-            {post.createdAt.toString().substring(0, 10) + " "}
+            {post.createdAt.toString().substring(0, 10) + " - "}
           </span>
           <span className="text-[#DC143C] font-semibold capitalize">
             {post.catSlug}
