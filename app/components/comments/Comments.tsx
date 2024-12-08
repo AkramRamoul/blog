@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 import { FullComment } from "@/types";
+import { ImSpinner2 } from "react-icons/im";
 
 const fetcher = async (url: string) => {
   const res = await axios.get(url);
@@ -46,35 +47,39 @@ function Comments({ postSlug }: { postSlug: string }) {
         </Link>
       )}
       <div className="mt-12">
-        {isLoading
-          ? "loading..."
-          : data.map((comment: FullComment) => (
-              <div className="mt-12" key={comment.id}>
-                <div className="flex items-center gap-[20px] mb-5">
-                  <div className="w-[50px] h-[50px] relative ">
-                    <Image
-                      src={
-                        comment.user.image ??
-                        `https://avatar.vercel.sh/${comment?.user?.name}`
-                      }
-                      alt="UserImage"
-                      fill
-                      style={{ objectFit: "cover" }}
-                      className="rounded-full border-gray-200 aspect-square"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-[500] text-lg text-muted-foreground">
-                      {comment.user.name}
-                    </span>
-                    <span className="font-light text-muted-foreground">
-                      {comment.createdAt.toString().substring(0, 10)}
-                    </span>
-                  </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center w-full h-full">
+            <ImSpinner2 className="animate-spin h-12 w-12" />
+          </div>
+        ) : (
+          data.map((comment: FullComment) => (
+            <div className="mt-12" key={comment.id}>
+              <div className="flex items-center gap-[20px] mb-5">
+                <div className="w-[50px] h-[50px] relative ">
+                  <Image
+                    src={
+                      comment.user.image ??
+                      `https://avatar.vercel.sh/${comment?.user?.name}`
+                    }
+                    alt="UserImage"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    className="rounded-full border-gray-200 aspect-square"
+                  />
                 </div>
-                <p className="text-md font-[300]">{comment.content}</p>
+                <div className="flex flex-col gap-1">
+                  <span className="font-[500] text-lg text-muted-foreground">
+                    {comment.user.name}
+                  </span>
+                  <span className="font-light text-muted-foreground">
+                    {comment.createdAt.toString().substring(0, 10)}
+                  </span>
+                </div>
               </div>
-            ))}
+              <p className="text-md font-[300]">{comment.content}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
