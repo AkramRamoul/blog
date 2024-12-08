@@ -1,15 +1,36 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-function Comments() {
-  const authed = "authed";
+import useSwr from "swr";
+import { useSession } from "next-auth/react";
+
+import axios from "axios";
+import { FullComment } from "@/types";
+
+const fetcher = async (url: string) => {
+  const res = await axios.get(url);
+  if (res.status != 200) {
+    const error = new Error(res.data.message);
+    throw error;
+  }
+  return res.data;
+};
+function Comments({ postSlug }: { postSlug: string }) {
+  const { isLoading, data } = useSwr(
+    `/api/comments?postSlug=${postSlug}`,
+    fetcher
+  );
+
+  const authed = useSession()?.status;
   return (
     <div className="mt-12">
       <h1 className="text-4xl font-bold text-muted-foreground mb-[30px]">
         Comments
       </h1>
-      {authed === "authed" ? (
+      {authed === "authenticated" ? (
         <div className="flex items-center justify-between gap-[30px]">
           <textarea
             placeholder="write a comment ..."
@@ -25,106 +46,35 @@ function Comments() {
         </Link>
       )}
       <div className="mt-12">
-        <div className="mt-12">
-          <div className="flex items-center gap-[20px] mb-5">
-            <div className="w-[50px] h-[50px] relative ">
-              <Image
-                src="/LOGO.jpg"
-                alt="UserImage"
-                fill
-                style={{ objectFit: "cover" }}
-                className="rounded-full border-gray-200 aspect-square"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-[500] text-lg text-muted-foreground">
-                John Doe
-              </span>
-              <span className="font-light text-muted-foreground">
-                30.11.2024
-              </span>
-            </div>
-          </div>
-          <p className="text-md font-[300]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quos
-            impedit dolore et at quae tempora accusamus cum, itaque ea!
-          </p>
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center gap-[20px] mb-5">
-            <div className="w-[50px] h-[50px] relative ">
-              <Image
-                src="/LOGO.jpg"
-                alt="UserImage"
-                fill
-                style={{ objectFit: "cover" }}
-                className="rounded-full border-gray-200 aspect-square"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-[500] text-lg text-muted-foreground">
-                John Doe
-              </span>
-              <span className="font-light text-muted-foreground">
-                30.11.2024
-              </span>
-            </div>
-          </div>
-          <p className="text-md font-[300]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quos
-            impedit dolore et at quae tempora accusamus cum, itaque ea!
-          </p>
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center gap-[20px] mb-5">
-            <div className="w-[50px] h-[50px] relative ">
-              <Image
-                src="/LOGO.jpg"
-                alt="UserImage"
-                fill
-                style={{ objectFit: "cover" }}
-                className="rounded-full border-gray-200 aspect-square"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-[500] text-lg text-muted-foreground">
-                John Doe
-              </span>
-              <span className="font-light text-muted-foreground">
-                30.11.2024
-              </span>
-            </div>
-          </div>
-          <p className="text-md font-[300]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quos
-            impedit dolore et at quae tempora accusamus cum, itaque ea!
-          </p>
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center gap-[20px] mb-5">
-            <div className="w-[50px] h-[50px] relative ">
-              <Image
-                src="/LOGO.jpg"
-                alt="UserImage"
-                fill
-                style={{ objectFit: "cover" }}
-                className="rounded-full border-gray-200 aspect-square"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-[500] text-lg text-muted-foreground">
-                John Doe
-              </span>
-              <span className="font-light text-muted-foreground">
-                30.11.2024
-              </span>
-            </div>
-          </div>
-          <p className="text-md font-[300]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quos
-            impedit dolore et at quae tempora accusamus cum, itaque ea!
-          </p>
-        </div>
+        {isLoading
+          ? "loading..."
+          : data.map((comment: FullComment) => (
+              <div className="mt-12" key={comment.id}>
+                <div className="flex items-center gap-[20px] mb-5">
+                  <div className="w-[50px] h-[50px] relative ">
+                    <Image
+                      src={
+                        comment.user.image ??
+                        `https://avatar.vercel.sh/${comment?.user?.name}`
+                      }
+                      alt="UserImage"
+                      fill
+                      style={{ objectFit: "cover" }}
+                      className="rounded-full border-gray-200 aspect-square"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-[500] text-lg text-muted-foreground">
+                      {comment.user.name}
+                    </span>
+                    <span className="font-light text-muted-foreground">
+                      {comment.createdAt.toString().substring(0, 10)}
+                    </span>
+                  </div>
+                </div>
+                <p className="text-md font-[300]">{comment.content}</p>
+              </div>
+            ))}
       </div>
     </div>
   );

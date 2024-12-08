@@ -4,6 +4,7 @@ import UserMenu from "../UserMenu";
 import ThemeToggle from "../ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import NavbarLinks from "./Link";
+import Link from "next/link";
 
 const socialMedia = [
   { src: "/facebook.png", alt: "Facebook" },
@@ -38,7 +39,7 @@ const NavBar = () => {
       md:text-center
     "
       >
-        BLOG
+        <Link href="/">Blog</Link>
       </div>
 
       {/* Links */}

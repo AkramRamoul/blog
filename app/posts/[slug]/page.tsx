@@ -63,7 +63,7 @@ async function SinglePost({ params }: { params: Promise<{ slug: string }> }) {
             dangerouslySetInnerHTML={{ __html: post.desc }}
           ></div>
           <div>
-            <Comments />
+            <Comments postSlug={slug} />
           </div>
         </div>
         <Menu />
