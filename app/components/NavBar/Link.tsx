@@ -22,7 +22,7 @@ export const links = [
   },
   {
     id: 3,
-    name: "Your Blogs",
+    name: "Mine",
     href: "/blog",
   },
 ];

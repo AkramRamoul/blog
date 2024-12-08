@@ -3,20 +3,18 @@ import CategoryList from "@/app/components/CategoryList";
 import Featured from "@/app/components/Featured";
 import Menu from "@/app/components/Menu/Menu";
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
-  searchParams: {
-    page: number;
-  };
+  searchParams: Promise<{ page: number }>;
 }) {
-  const page = searchParams.page || 1;
+  const page = (await searchParams).page || 1;
   return (
     <div className="">
       <Featured />
       <CategoryList />
       <div className="flex gap-[50px] ">
-        <CardList page={page} />
+        <CardList page={page} cat="" />
         <Menu />
       </div>
     </div>

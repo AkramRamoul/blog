@@ -9,7 +9,7 @@ function Featured() {
         <b>Hey this is Akram</b> read my post{" "}
       </h1>
       <div className="mt-14 flex gap-[50px] items-center">
-        <div className="relative flex-1 h-[400px] hidden sm:flex">
+        <div className="relative flex-1 h-[400px] hidden md:flex">
           <Image
             src="/p1.jpeg"
             alt="post-Image"
