@@ -26,7 +26,7 @@ function Card({ post }: { post: Post }) {
           </span>
         </div>
         <Link href={`/posts/${post.slug}`}>
-          <h1>{post.title}</h1>
+          <h1 className="text-2xl font-semibold">{post.title}</h1>
         </Link>
         <p className="text-lg font-light text-muted-foreground max-w-full">
           {post.desc.substring(0, 100)}
