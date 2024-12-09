@@ -28,9 +28,10 @@ function Card({ post }: { post: Post }) {
         <Link href={`/posts/${post.slug}`}>
           <h1 className="text-2xl font-semibold">{post.title}</h1>
         </Link>
-        <p className="text-lg font-light text-muted-foreground max-w-full">
-          {post.desc.substring(0, 100)}
-        </p>
+        <p
+          className="text-lg font-light text-muted-foreground max-w-full"
+          dangerouslySetInnerHTML={{ __html: post.desc.substring(0, 10) }}
+        ></p>
         <Link
           href={`/posts/${post.slug}`}
           className="border-b-2 max-w-fit py-1"
