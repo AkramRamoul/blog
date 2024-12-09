@@ -58,7 +58,7 @@ async function SinglePost({ params }: { params: Promise<{ slug: string }> }) {
         )}
       </div>
       <div className="flex gap-[50px]">
-        <div className="flex-[5] mt-12">
+        <div className="flex-[5] mt-5">
           <div
             className=""
             dangerouslySetInnerHTML={{ __html: post.desc }}

@@ -30,7 +30,7 @@ function Card({ post }: { post: Post }) {
         </Link>
         <div
           className="text-lg font-light text-muted-foreground max-w-full"
-          dangerouslySetInnerHTML={{ __html: post.desc.substring(0, 10) }}
+          dangerouslySetInnerHTML={{ __html: post.desc.substring(0, 15) }}
         ></div>
         <Link
           href={`/posts/${post.slug}`}
