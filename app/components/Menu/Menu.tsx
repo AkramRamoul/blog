@@ -6,17 +6,12 @@ function Menu() {
     <div className="flex-[2] mt-[50px] hidden lg:block">
       <h2 className="text-muted-foreground text-base font-normal">Hottest</h2>
       <h1 className="text-2xl">Most popular</h1>
-      <MenuPosts withImage={false} />
+      <MenuPosts />
       <h2 className="text-muted-foreground text-base font-normal">
         Discover by topic
       </h2>
       <h1 className="text-2xl">Categories</h1>
       <Catlist />
-      <h2 className="text-muted-foreground text-base font-normal">
-        Chosen by edtitors
-      </h2>
-      <h1 className="text-2xl">{"Editor's Pick"}</h1>
-      <MenuPosts withImage={true} />
     </div>
   );
 }

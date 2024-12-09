@@ -19,7 +19,7 @@ function Card({ post }: { post: Post }) {
       <div className="flex-1 flex-col gap-[20px] flex">
         <div>
           <span className="text-muted-foreground">
-            {post.createdAt.toString().substring(0, 10)} -{" "}
+            {new Date(post.createdAt).toLocaleDateString()} {" - "}
           </span>
           <span className="text-[#DC143C] font-semibold capitalize">
             {post.catSlug}
@@ -28,10 +28,10 @@ function Card({ post }: { post: Post }) {
         <Link href={`/posts/${post.slug}`}>
           <h1 className="text-2xl font-semibold">{post.title}</h1>
         </Link>
-        <p
+        <div
           className="text-lg font-light text-muted-foreground max-w-full"
           dangerouslySetInnerHTML={{ __html: post.desc.substring(0, 10) }}
-        ></p>
+        ></div>
         <Link
           href={`/posts/${post.slug}`}
           className="border-b-2 max-w-fit py-1"
