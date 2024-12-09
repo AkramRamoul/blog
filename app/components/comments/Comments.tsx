@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import useSwr from "swr";
@@ -20,10 +20,26 @@ const fetcher = async (url: string) => {
   return res.data;
 };
 function Comments({ postSlug }: { postSlug: string }) {
-  const { isLoading, data } = useSwr(
+  const { isLoading, mutate, data } = useSwr(
     `/api/comments?postSlug=${postSlug}`,
     fetcher
   );
+  const [content, setContent] = useState<string>("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      await axios.post("/api/comments", { content, postSlug });
+      mutate();
+      setContent("");
+    } catch (error) {
+      console.error("Error creating comment:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const authed = useSession()?.status;
   return (
@@ -34,11 +50,19 @@ function Comments({ postSlug }: { postSlug: string }) {
       {authed === "authenticated" ? (
         <div className="flex items-center justify-between gap-[30px]">
           <textarea
+            value={content}
             placeholder="write a comment ..."
             className="p-[20px] w-full border-gray-500 border-2"
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
-          <Button className="border-none cursor-pointer text-white bg-green-500 py-4 px-5 hover:bg-green-600">
-            Post
+          <Button
+            onClick={handleSubmit}
+            disabled={isSubmitting || !content.trim()}
+            className={`border-none text-white py-4 px-5 ${
+              isSubmitting ? "bg-gray-400" : "bg-green-500 hover:bg-green-600"
+            }`}
+          >
+            {isSubmitting ? "Posting..." : "Post"}
           </Button>
         </div>
       ) : (

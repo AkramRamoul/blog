@@ -5,27 +5,33 @@ import React, { useEffect } from "react";
 import { BsFacebook, BsGithub, BsGoogle } from "react-icons/bs";
 import { toast } from "sonner";
 import { ImSpinner2 } from "react-icons/im";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { status } = useSession();
 
+  // Extract the callbackUrl or set a default route
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const socialSignIn = (action: string) => {
-    signIn(action, { redirect: false }).then((callback) => {
+    signIn(action, { redirect: false, callbackUrl }).then((callback) => {
       if (callback?.error) {
         toast.error("Invalid Credentials");
       }
       if (callback?.ok && !callback.error) {
         toast.success("Logged in");
+        router.push(callbackUrl); // Redirect after successful login
       }
     });
   };
+
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/");
+      router.push(callbackUrl); // Redirect if already authenticated
     }
-  }, [status, router]);
+  }, [status, router, callbackUrl]);
 
   if (status === "loading") {
     return (
@@ -34,15 +40,13 @@ function LoginPage() {
       </div>
     );
   }
-  console.log(status);
+
   return (
     <div className="flex mt-8 items-center justify-center ">
       <div
         className="bg-[#f0f0f0] dark:bg-[#1f273a] gap-10 flex 
-      
-      py-[50px] px-[50px] flex-col rounded-[10px] 
-      md:py-[100px] md:px-[100px]
-      "
+        py-[50px] px-[50px] flex-col rounded-[10px] 
+        md:py-[100px] md:px-[100px]"
       >
         <h1 className="text-md text-nowrap md:text-xl font-bold ">
           Choose a login method
