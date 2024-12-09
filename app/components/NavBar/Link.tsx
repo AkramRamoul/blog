@@ -25,6 +25,11 @@ export const links = [
     name: "Mine",
     href: "/blog",
   },
+  {
+    id: 4,
+    name: "Write",
+    href: "/write",
+  },
 ];
 
 function NavbarLinks() {

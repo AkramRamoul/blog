@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -25,5 +26,25 @@ export const GET = async (req: Request) => {
   } catch (error) {
     console.error(error, "Message_Error");
     return new NextResponse("Internal Erorr", { status: 500 });
+  }
+};
+
+export const POST = async (req: Request) => {
+  try {
+    const currentUser = await getCurrentUser();
+    const body = await req.json();
+    console.log("Request Body:", body);
+
+    if (!currentUser) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const newPost = await prisma.post.create({
+      data: { ...body, userEmail: currentUser.email },
+    });
+    return NextResponse.json(newPost, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "Internal Error" }, { status: 500 });
   }
 };

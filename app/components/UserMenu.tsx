@@ -21,13 +21,6 @@ const UserMenu = () => {
     "font-semibold px-3 py-1 rounded-md"
   );
 
-  const writeClass = cn(
-    path === "/write"
-      ? "bg-muted text-primary"
-      : "hover:bg-muted hover:bg-opacity-75",
-    "font-semibold px-3 py-1 rounded-md"
-  );
-
   return (
     <>
       {status === "unauthenticated" ? (
@@ -36,9 +29,6 @@ const UserMenu = () => {
         </Link>
       ) : (
         <>
-          <Link href="/write" className={writeClass}>
-            Write
-          </Link>
           <UserNav
             name={data?.user?.name as string}
             email={data?.user?.email as string}
