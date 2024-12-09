@@ -4,6 +4,17 @@ import { useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.bubble.css";
 import { CldUploadWidget } from "next-cloudinary";
+import { toast } from "sonner";
+
+const modules = {
+  clipboard: { matchVisual: false },
+  toolbar: [
+    ["bold", "italic", "underline"],
+    [{ header: [1, 2, 3, false] }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "image"],
+  ],
+};
 function WritePage() {
   const [file, setFile] = useState<File | null>(null);
   const [open, setOpen] = useState(false);
@@ -39,13 +50,13 @@ function WritePage() {
         }),
       });
       if (response.ok) {
-        alert("Post published successfully!");
+        toast.success("Post published successfully!");
       } else {
-        alert("Failed to publish the post. Please try again.");
+        toast.error("Failed to publish the post. Please try again.");
       }
     } catch (error) {
       console.error("Error creating post:", error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -75,7 +86,6 @@ function WritePage() {
         >
           <Image src="/plus.png" alt="add-button" width={16} height={16} />
         </button>
-
         {open && (
           <div className="flex gap-5 bg-background absolute z-[999] w-full left-12">
             <CldUploadWidget
@@ -120,6 +130,7 @@ function WritePage() {
           value={value}
           onChange={setValue}
           placeholder="Tell your story here"
+          modules={modules}
         />
       </div>
       <button
