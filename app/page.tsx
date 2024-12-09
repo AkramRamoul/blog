@@ -1,7 +1,8 @@
-import CardList from "@/app/components/Card/CardList";
-import CategoryList from "@/app/components/CategoryList";
-import Featured from "@/app/components/Featured";
-import Menu from "@/app/components/Menu/Menu";
+import { getCategory } from "@/actions/actions";
+import CategoryList from "./components/CategoryList";
+import Featured from "./components/Featured";
+import CardList from "./components/Card/CardList";
+import Menu from "./components/Menu/Menu";
 
 export default async function Home({
   searchParams,
@@ -9,11 +10,13 @@ export default async function Home({
   searchParams: Promise<{ page: number }>;
 }) {
   const page = (await searchParams).page || 1;
+  const categories = await getCategory();
+
   return (
-    <div className="">
+    <div>
       <Featured />
-      <CategoryList />
-      <div className="flex gap-[50px] ">
+      <CategoryList data={categories} />
+      <div className="flex gap-[50px]">
         <CardList page={page} cat="" />
         <Menu />
       </div>

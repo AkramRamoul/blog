@@ -31,7 +31,7 @@ function CardList({ page, cat }: CardListProps) {
   // Handle loading and error states
   if (isLoading)
     return (
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="flex items-center justify-center w-full h-full mt-5">
         <ImSpinner2 className="animate-spin h-12 w-12" />
       </div>
     );

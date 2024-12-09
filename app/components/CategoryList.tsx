@@ -2,17 +2,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Category } from "@prisma/client";
-import { getCategory } from "@/actions/actions";
 
-const CategoryList = async () => {
-  const Data = await getCategory();
+const CategoryList = ({ data }: { data: Category[] }) => {
   return (
     <div className="mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center my-12">
         Popular Categories
       </h1>
       <div className="flex flex-wrap justify-between gap-3">
-        {Data.map((item: Category) => (
+        {data.map((item: Category) => (
           <Link
             href={`/blog?cat=${item.slug}`}
             key={item.id}
