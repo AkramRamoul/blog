@@ -5,13 +5,19 @@ import ThemeToggle from "../ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import NavbarLinks from "./Link";
 import Link from "next/link";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 const socialMedia = [
   { src: "/facebook.png", alt: "Facebook" },
   { src: "/instagram.png", alt: "Instagram" },
   { src: "/youtube.png", alt: "YouTube" },
 ];
-const NavBar = () => {
+const NavBar = async () => {
+  const userData = await getCurrentUser();
+  const userImage = userData?.image;
+  const userName = userData?.name;
+  const email = userData?.email;
+
   return (
     <div className="flex items-center justify-between h-[100px]">
       <div className="hidden lg:flex justify-center flex-1 items-center col-span-6 gap-x-2">
@@ -60,7 +66,7 @@ const NavBar = () => {
       >
         <ThemeToggle />
         <NavbarLinks />
-        <UserMenu />
+        <UserMenu userImage={userImage!} name={userName!} email={email!} />
       </div>
       <div className="md:hidden ml-3">
         <MobileMenu />

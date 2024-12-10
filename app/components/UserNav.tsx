@@ -23,6 +23,7 @@ interface props {
 }
 
 function UserNav({ email, name, userImage }: props) {
+  console.log(userImage);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

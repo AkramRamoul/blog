@@ -5,10 +5,15 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import UserNav from "./UserNav";
+interface props {
+  email: string;
+  name: string;
+  userImage: string | undefined;
+}
 
-const UserMenu = () => {
+const UserMenu = ({ email, name, userImage }: props) => {
   const path = usePathname();
-  const { data, status } = useSession();
+  const { status } = useSession();
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -30,12 +35,9 @@ const UserMenu = () => {
       ) : (
         <>
           <UserNav
-            name={data?.user?.name as string}
-            email={data?.user?.email as string}
-            userImage={
-              data?.user?.image ??
-              `https://avatar.vercel.sh/${data?.user?.name}`
-            }
+            name={name}
+            email={email}
+            userImage={userImage ?? `https://avatar.vercel.sh/whatever`}
           />
         </>
       )}
