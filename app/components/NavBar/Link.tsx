@@ -22,11 +22,6 @@ export const links = [
   },
   {
     id: 3,
-    name: "Mine",
-    href: "/blog",
-  },
-  {
-    id: 4,
     name: "Write",
     href: "/write",
   },

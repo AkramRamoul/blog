@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.bubble.css";
 import { CldUploadWidget } from "next-cloudinary";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
 
 const modules = {
   clipboard: { matchVisual: false },
@@ -21,6 +21,7 @@ function WritePage() {
   const [value, setValue] = useState<string>("");
   const [catSlug, setCatSlug] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
   /* eslint-disable  @typescript-eslint/no-explicit-any */
 
   const handleUploadSuccess = (result: any) => {
