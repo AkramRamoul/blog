@@ -25,16 +25,16 @@ function WritePage() {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
 
   const handleUploadSuccess = (result: any) => {
-    setFile(result.info.secure_url); // Save the uploaded file URL
+    setFile(result.info.secure_url);
   };
 
   const toSlug = (str: string) => {
     return str
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s-]/g, "") // Remove non-alphanumeric characters
-      .replace(/[\s_-]+/g, "-") // Replace spaces and underscores with dashes
-      .replace(/^-+|-+$/g, ""); // Remove leading or trailing dashes
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   };
 
   const handleSubmit = async () => {
