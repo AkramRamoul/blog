@@ -41,13 +41,13 @@ function Comments({ postSlug }: { postSlug: string }) {
     }
   };
 
-  const authed = useSession()?.status;
+  const { status } = useSession();
   return (
     <div className="mt-12">
       <h1 className="text-4xl font-bold text-muted-foreground mb-[30px]">
         Comments
       </h1>
-      {authed === "authenticated" ? (
+      {status === "authenticated" ? (
         <div className="flex items-center justify-between gap-[30px]">
           <textarea
             value={content}

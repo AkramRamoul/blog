@@ -1,11 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic"; // Dynamic import
 import Image from "next/image";
 import { useState } from "react";
-import ReactQuill from "react-quill-new";
-import "react-quill-new/dist/quill.bubble.css";
 import { CldUploadWidget } from "next-cloudinary";
 import { toast } from "sonner";
+
+// Dynamically import ReactQuill
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+import "react-quill-new/dist/quill.bubble.css";
 
 const modules = {
   clipboard: { matchVisual: false },
@@ -16,12 +19,14 @@ const modules = {
     ["link", "image"],
   ],
 };
+
 function WritePage() {
   const [file, setFile] = useState<File | null>(null);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string>("");
   const [catSlug, setCatSlug] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+
   /* eslint-disable  @typescript-eslint/no-explicit-any */
 
   const handleUploadSuccess = (result: any) => {
@@ -70,7 +75,7 @@ function WritePage() {
         className="p-12 text-6xl border-none outline-none bg-transparent"
       />
       <select
-        className="mb-[50px] py-[10px] px-[20px] ml-[50px] w-max border-none outline-none  bg-background"
+        className="mb-[50px] py-[10px] px-[20px] ml-[50px] w-max border-none outline-none bg-background"
         onChange={(e) => setCatSlug(e.target.value)}
       >
         <option value="style">style</option>
@@ -145,4 +150,3 @@ function WritePage() {
 }
 
 export default WritePage;
-export const dynamic = "force-dynamic";
