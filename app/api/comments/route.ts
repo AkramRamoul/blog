@@ -15,10 +15,9 @@ export const GET = async (req: Request) => {
         user: true,
       },
     });
-    if (!comments) {
-      return [];
-    }
-    return NextResponse.json(comments, { status: 200 });
+
+    // Always return a NextResponse object
+    return NextResponse.json(comments || [], { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Internal Error" }, { status: 500 });
