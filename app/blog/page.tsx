@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import CardList from "@/app/components/Card/CardList";
 import Menu from "@/app/components/Menu/Menu";
 
