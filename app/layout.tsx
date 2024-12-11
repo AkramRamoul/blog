@@ -45,6 +45,7 @@ export default function RootLayout({
                 className="
               lg:px-[40px] md:max-w-[768px] sm:max-w-[640px] max-w-[475px] lg:max-w-[1366px] xl:max-w-[1024px] mx-auto px-20"
               >
+                {/* @ts-expect-error Server Component */}
                 <NavBar />
                 {children}
                 <Toaster />
