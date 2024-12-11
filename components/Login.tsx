@@ -69,3 +69,4 @@ function Login() {
 }
 
 export default Login;
+export const dynamic = "force-dynamic";

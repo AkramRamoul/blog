@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { SettingsForm } from "../components/SettingsForm";
 import { getCurrentUser } from "../../actions/getCurrentUser";
-export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
   const currentUser = await getCurrentUser();
@@ -17,3 +16,4 @@ export default async function SettingsPage() {
     </Card>
   );
 }
+export const dynamic = "force-dynamic";

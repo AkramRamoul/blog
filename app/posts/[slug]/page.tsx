@@ -7,3 +7,4 @@ async function Page({ params }: { params: Promise<{ slug: string }> }) {
 }
 
 export default Page;
+export const dynamic = "force-dynamic";
